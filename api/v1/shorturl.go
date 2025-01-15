@@ -2,16 +2,17 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis/v8"
 	"net/http"
 	model "shorturl/modle"
 	"shorturl/server"
+	"shorturl/utils/errmsg"
 	"time"
 )
 
 func GenerateShortURL(c *gin.Context) {
 	// 获取原始 URL
 	url := c.PostForm("url")
+	expiration := c.PostForm("expiration") // 获取过期时间，例如 "1h", "30m", "1d"
 	if url == "" {
 		c.JSON(400, gin.H{"error": "url is required"})
 		return
@@ -30,7 +31,7 @@ func GenerateShortURL(c *gin.Context) {
 
 	// 生成短链
 	shortURLStr := server.GenerateShortURLString(url)
-	expiration := c.PostForm("expiration") // 获取过期时间，例如 "1h", "30m", "1d"
+
 	var expireDuration time.Duration
 	var err error
 	if expiration != "" {
@@ -69,16 +70,10 @@ func HandleShortURL(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "short URL is required"})
 		return
 	}
-	// 从 Redis 中查找原始 URL
-	originalURL, err := model.Redis.Rdb.Get(model.Redis.Ctx, shortURL).Result()
-	if err == redis.Nil {
-		// 短链不存在于 Redis 中，可能已过期或未生成
-		c.JSON(http.StatusNotFound, gin.H{"error": "short URL not found or expired"})
-		return
-	} else if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch original URL"})
+	code, originalURL := server.HandleShort(shortURL)
+	if code != errmsg.SUCCESS {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "short URL is not found"})
 		return
 	}
-	// 重定向到原始 URL
 	c.Redirect(http.StatusMovedPermanently, originalURL)
 }
