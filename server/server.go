@@ -45,15 +45,15 @@ func HandleShort(shortURL string) (code int, OriginalURL string) {
 			err = model.Redis.Rdb.Set(model.Redis.Ctx, shortURL, originalURL, time.Hour).Err()
 			if err != nil {
 				// Redis 存储失败，返回错误
-				return errmsg.ERROR, ""
+				return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
 			}
 			return errmsg.SUCCESS, originalURL
 		} else if err == gorm.ErrRecordNotFound {
 			// 数据库中也不存在该短链，返回错误
-			return errmsg.ERROR_GET_ERROR_FROM_MYSQL_OFSHORTURL, ""
+			return errmsg.ERROR_NOT_FOUND_IN_MYSQL, ""
 		} else {
 			// 数据库查询出现其他错误，返回错误
-			return errmsg.ERROR, ""
+			return errmsg.ERROR_OTHER_EMS, ""
 		}
 	} else if err != nil {
 		// Redis 查找出现错误，返回错误

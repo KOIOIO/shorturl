@@ -6,20 +6,17 @@ const (
 )
 
 const (
-	//shorturl相关
-	ERROR_GET_ERROR_FROM_MYSQL_OFSHORTURL = 1001
-	ERROR_GET_ERROR_FROM_REDISOFSHORTURL  = 1002
-
-	//longurl相关
-	ERROR_GET_ERROR_FROM_MYSQL_OFLONGURL = 2001
-	ERROR_GET_ERROR_FROM_REDISOFLONGURl  = 2002
+	//redis
+	ERROR_FAILED_SAVE_TO_REDIS = 1001
+	//MYSQL
+	ERROR_NOT_FOUND_IN_MYSQL = 2001
+	ERROR_OTHER_EMS          = 2002
 )
 
 var errmsg = map[int]string{
-	SUCCESS:                               "操作成功",
-	ERROR:                                 "操作失败",
-	ERROR_GET_ERROR_FROM_MYSQL_OFSHORTURL: "mysql获取短链接错误",
-	ERROR_GET_ERROR_FROM_REDISOFSHORTURL:  "redis获取短链接错误",
-	ERROR_GET_ERROR_FROM_MYSQL_OFLONGURL:  "mysql获取长链接错误",
-	ERROR_GET_ERROR_FROM_REDISOFLONGURl:   "redis获取长链接错误",
+	SUCCESS:                    "操作成功",
+	ERROR:                      "操作失败",
+	ERROR_FAILED_SAVE_TO_REDIS: "保存到redis失败",
+	ERROR_NOT_FOUND_IN_MYSQL:   "MYSQL中未找到该URL",
+	ERROR_OTHER_EMS:            "其他错误",
 }
