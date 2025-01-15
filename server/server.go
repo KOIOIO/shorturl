@@ -50,7 +50,7 @@ func HandleShort(shortURL string) (code int, OriginalURL string) {
 			return errmsg.SUCCESS, originalURL
 		} else if err == gorm.ErrRecordNotFound {
 			// 数据库中也不存在该短链，返回错误
-			return errmsg.ERROR, ""
+			return errmsg.ERROR_GET_ERROR_FROM_MYSQL_OFSHORTURL, ""
 		} else {
 			// 数据库查询出现其他错误，返回错误
 			return errmsg.ERROR, ""
