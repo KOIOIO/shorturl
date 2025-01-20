@@ -2,29 +2,25 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	v1 "shorturl/api/v1"
+	_ "shorturl/docs"
 	"shorturl/middleware"
 )
 
-//
-//func InitRouter() {
-//	r := gin.Default()
-//	// 添加静态文件服务
-//	r.Static("/web", "../web")
-//	r.Use(middleware.Cors())
-//	r.Use(middleware.Logger())
-//	r.POST("/generate", v1.GenerateShortURL)
-//	r.GET("/:shortURL", v1.HandleShortURL)
-//
-//	err := r.Run(":8080")
-//	if err != nil {
-//		panic(err)
-//	} else {
-//		log.Println("服务启动成功")
-//	}
-//}
+// @title           短链生成器
+// @version         1.0
+// @description     短链生成器
 
-// InitRouter 初始化路由配置
+// @contact.name   Xiaoyu_Wang
+// @contact.url    https://gitee.com/wang-wenyu-fdhfj/short-url
+// @contact.email  2652777599@qq.com
+
+// @host      localhost:8080
+
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          https://swagger.io/resources/open-api/
 func InitRouter() {
 	// 创建默认的gin路由器
 	r := gin.Default()
@@ -38,12 +34,9 @@ func InitRouter() {
 	// 使用日志中间件记录请求信息
 	r.Use(middleware.Logger())
 
-	// 配置POST请求路由，用于生成短URL
-	r.POST("/generate", v1.GenerateShortURL)
-
-	// 配置GET请求路由，用于处理短URL的访问
+	r.POST("/generate", v1.Generate)
 	r.GET("/:shortURL", v1.HandleShortURL)
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	// 启动服务监听8080端口
 	err := r.Run(":8080")
 

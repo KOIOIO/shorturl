@@ -31,7 +31,7 @@ func init() {
 
 func LoadServer(file *ini.File) {
 	AppMode = file.Section("server").Key("AppMode").MustString("debug")
-	HttpPort = file.Section("server").Key("HttpPort").MustString(":8080")
+	HttpPort = file.Section("server").Key("HttpPort").MustString(":3000")
 }
 
 func LoadData(file *ini.File) {
