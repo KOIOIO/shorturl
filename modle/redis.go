@@ -9,14 +9,15 @@ import (
 
 // 创建一个Redis操作的结构体用于后续对redis的操作
 type Rediscli struct {
-	Ctx context.Context
-	Rdb *redis.Client
+	Ctx context.Context // 上下文，用于取消请求和传递请求级值
+	Rdb *redis.Client   // Redis客户端，用于执行Redis命令
 }
 
 // 创建一个全局变量，用于后续对redis的操作
 var Redis *Rediscli
 
 // 初始化redis
+// 该函数创建一个Redis客户端实例，并检查与Redis服务器的连接
 func InitRedis() {
 	Redis = &Rediscli{}
 	Redis.Ctx = context.Background()

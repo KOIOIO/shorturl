@@ -11,11 +11,15 @@ import (
 	"time"
 )
 
+// Db 用于全局访问数据库连接
 var Db *gorm.DB
+
+// err 用于全局错误处理
 var err error
 
+// InitDb 初始化数据库连接
 func InitDb() {
-
+	// 构建数据库连接字符串
 	dns := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		utils.DbUser,
 		utils.DbPassWord,
@@ -23,6 +27,7 @@ func InitDb() {
 		utils.DbPort,
 		utils.DbName,
 	)
+	// 打开数据库连接并配置gorm
 	Db, err = gorm.Open(mysql.Open(dns), &gorm.Config{
 		// gorm日志模式：silent
 		Logger: logger.Default.LogMode(logger.Silent),
@@ -36,6 +41,7 @@ func InitDb() {
 		},
 	})
 
+	// 检查数据库连接是否成功
 	if err != nil {
 		fmt.Println("连接数据库失败，请检查参数：", err)
 		os.Exit(1)
@@ -45,6 +51,7 @@ func InitDb() {
 	// 注意:初次运行后可注销此行
 	_ = Db.AutoMigrate(&Shorturl{})
 
+	// 获取底层sql.DB对象
 	sqlDB, _ := Db.DB()
 	// SetMaxIdleCons 设置连接池中的最大闲置连接数。
 	sqlDB.SetMaxIdleConns(10)
@@ -54,5 +61,4 @@ func InitDb() {
 
 	// SetConnMaxLifetiment 设置连接的最大可复用时间。
 	sqlDB.SetConnMaxLifetime(10 * time.Second)
-
 }

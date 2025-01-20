@@ -10,8 +10,11 @@ import (
 	"time"
 )
 
+// Bloom 是一个全局的布隆过滤器实例
 var Bloom = NewBloomFilter()
 
+// GenerateShortURLString 将给定的长URL转换为短URL字符串
+// 该函数使用MD5哈希和Base64编码来生成短URL
 func GenerateShortURLString(url string) string {
 	hash := md5.Sum([]byte(url))
 	shortURLBytes := hash[:]
@@ -19,19 +22,9 @@ func GenerateShortURLString(url string) string {
 	return encoded[:8]
 }
 
-//func HandleShort(shortURL string) (code int, OriginalURL string) {
-//	// 从 Redis 中查找原始 URL
-//	originalURL, err := model.Redis.Rdb.Get(model.Redis.Ctx, shortURL).Result()
-//	if err == redis.Nil {
-//		// 短链不存在于 Redis 中，可能已过期
-//		return errmsg.ERROR, ""
-//	} else if err != nil {
-//		return errmsg.ERROR, ""
-//	}
-//	// 重定向到原始 URL
-//	return errmsg.SUCCESS, originalURL
-//}
-
+// HandleShort 处理短URL，返回原始URL和状态码
+// 该函数首先尝试从Redis中获取原始URL，如果失败则尝试从数据库中获取
+// 如果在Redis和数据库中都找不到短URL，或者出现错误，将返回相应的错误码
 func HandleShort(shortURL string) (code int, OriginalURL string) {
 	// 从 Redis 中查找原始 URL
 	originalURL, err := model.Redis.Rdb.Get(model.Redis.Ctx, shortURL).Result()
