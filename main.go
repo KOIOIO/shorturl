@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	// TODO: Implement me!
 	model.InitRedis()
 	model.InitDb()
 	routers.InitRouter()
