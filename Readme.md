@@ -159,3 +159,18 @@ if Bloom.MightContain(url) {
 ```
 
 你会发现布隆过滤器的判断和这个函数如出一辙
+
+# 不足
+1. 删除超时数据不是以最后访问时间为标准，而是以存在时间为准
+2. 删除函数放置的位置我感觉与不是很合适，感觉这样防止会让HandlerURL函数的速度变慢
+# 问题
+1. 前端还没链接，不过也是写了个简单的 
+> web/index.html
+   ![img_2.png](img_2.png)
+前后端交互我在看这个视频，这个是后端学前端的
+https://www.bilibili.com/video/BV1Tt4y1772f/?spm_id_from=333.337.search-card.all.click
+   > 准备看到vue2，寒假把js之前看完就行了。。。
+2. 还有一个跨域问题正在解决(写了中间件，也用了cors.Default())
+ 我用的swagger发现的
+3. ![img_3.png](img_3.png)
+ 
