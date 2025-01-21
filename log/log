@@ -1,9 +1,11 @@
-time="2025-01-20T20:36:56+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=24 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="8 ms" status=200
-time="2025-01-20T20:37:04+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=24 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="1 ms" status=200
-time="2025-01-20T20:32:48+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=24 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="0 ms" status=200
-ndTime="0 ms" status=200
-time="2025-01-20T20:19:10+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" DataSize=312217 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/swagger/swagger-ui-standalone-preset.js SpendTime="0 ms" status=200
-time="2025-01-20T20:19:10+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" DataSize=1061579 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/swagger/swagger-ui-bundle.js SpendTime="4 ms" status=200
+time="2025-01-21T11:26:25+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=246 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/1F_jSAnt SpendTime="0 ms" status=301
+
+time="2025-01-21T11:16:42+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=49 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="0 ms" status=200
+time="2025-01-21T11:16:43+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=49 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="0 ms" status=200
+time="2025-01-21T10:11:25+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=24 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="1 ms" status=200
+time="2025-01-21T10:11:26+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=24 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="0 ms" status=200
+time="2025-01-21T10:11:38+08:00" level=info Agent="Apifox/1.0.0 (https://apifox.com)" DataSize=24 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="7 ms" status=200
+::1" Method=GET Path=/swagger/swagger-ui-bundle.js SpendTime="4 ms" status=200
 time="2025-01-20T20:19:10+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" DataSize=2890 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/swagger/doc.json SpendTime="0 ms" status=200
 time="2025-01-20T20:19:10+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" DataSize=628 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/swagger/favicon-32x32.png SpendTime="0 ms" status=200
 time="2025-01-20T20:19:23+08:00" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" DataSize=110 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/MaIvY3k7 SpendTime="0 ms" status=301
