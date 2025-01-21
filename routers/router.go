@@ -37,6 +37,7 @@ func InitRouter() {
 	r.POST("/generate", v1.Generate)
 	r.GET("/:shortURL", v1.HandleShortURL)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	// 启动服务监听8080端口
 	err := r.Run(":8080")
 
