@@ -1,0 +1,61 @@
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact:
+    email: 2652777599@qq.com
+    name: Xiaoyu_Wang
+    url: https://gitee.com/wang-wenyu-fdhfj/short-url
+  description: 短链生成器
+  title: 短链生成器
+  version: "1.0"
+paths:
+  /{shortURL}:
+    get:
+      consumes:
+      - application/json
+      description: 根据提供的短链接参数重定向到原始URL
+      parameters:
+      - description: 短链接参数
+        in: path
+        name: shortURL
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "301":
+          description: Moved Permanently
+        "400":
+          description: Bad Request
+      summary: 处理短链接跳转
+      tags:
+      - ShortURL
+  /generate:
+    post:
+      consumes:
+      - application/json
+      description: 根据提供的原始URL和过期时间生成短链接
+      parameters:
+      - description: 原始URL
+        in: formData
+        name: url
+        required: true
+        type: string
+      - description: 过期时间，例如 '1h', '30m', '1d'
+        in: formData
+        name: expiration
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: 生成短链接
+      tags:
+      - ShortURL
+swagger: "2.0"

@@ -1,0 +1,91 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "短链生成器",
+        "title": "短链生成器",
+        "contact": {
+            "name": "Xiaoyu_Wang",
+            "url": "https://gitee.com/wang-wenyu-fdhfj/short-url",
+            "email": "2652777599@qq.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "paths": {
+        "/generate": {
+            "post": {
+                "description": "根据提供的原始URL和过期时间生成短链接",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ShortURL"
+                ],
+                "summary": "生成短链接",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "原始URL",
+                        "name": "url",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "过期时间，例如 '1h', '30m', '1d'",
+                        "name": "expiration",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/{shortURL}": {
+            "get": {
+                "description": "根据提供的短链接参数重定向到原始URL",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ShortURL"
+                ],
+                "summary": "处理短链接跳转",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "短链接参数",
+                        "name": "shortURL",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "301": {
+                        "description": "Moved Permanently"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
+    }
+}
