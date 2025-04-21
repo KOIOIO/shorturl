@@ -24,7 +24,11 @@ func Generate(c *gin.Context) {
 	expiration := c.PostForm("expiration")
 	code, shortURLStr := server.GenerateShortURL(url, expiration)
 	if code == errmsg.SUCCESS {
-		c.JSON(200, gin.H{"short_url": shortURLStr})
+		c.JSON(200, gin.H{
+			"code":      code,
+			"short_url": shortURLStr,
+			"message":   "短链接生成成功",
+		})
 		return
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "返回错误"})

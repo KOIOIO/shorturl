@@ -11,4 +11,5 @@ type Shorturl struct {
 	gorm.Model
 	Shorturl string `gorm:"type:varchar(20);not null" json:"shorturl"`
 	Url      string `gorm:"type:varchar(200);not null" json:"url"`
+	ID       uint64 `gorm:"primaryKey;autoIncrement:false" json:"id"` // 使用雪花ID作为主键
 }

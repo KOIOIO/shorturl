@@ -1,11 +1,10 @@
 package server
 
 import (
-	"crypto/md5"
-	"encoding/base64"
-	"github.com/go-redis/redis/v8"
+	"errors"
+	"github.com/sony/sonyflake"
 	"gorm.io/gorm"
-	"log"
+
 	model "shorturl/modle"
 	"shorturl/utils/errmsg"
 	"time"
@@ -13,6 +12,23 @@ import (
 
 // Bloom 是一个全局的布隆过滤器实例
 var Bloom = NewBloomFilter()
+var flake = sonyflake.NewSonyflake(sonyflake.Settings{})
+
+const base62Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+func base62Encode(num uint64) string {
+	if num == 0 {
+		return string(base62Chars[0])
+	}
+
+	var encoded []byte
+	for num > 0 {
+		remainder := num % 62
+		num /= 62
+		encoded = append([]byte{base62Chars[remainder]}, encoded...)
+	}
+	return string(encoded)
+}
 
 //func GenerateShortURLString(url string) string {
 //        // 使用MD5哈希算法对URL进行哈希计算
@@ -40,115 +56,80 @@ func InDb(url string) bool {
 
 func GenerateShortURL(url string, expiration string) (int, string) {
 	if url == "" {
-		// 如果URL为空，返回错误
 		return errmsg.ERROR_URL_IS_NULL, ""
 	}
 
-	/*
-		1.先检查布隆过滤器
-		2.再检查数据库
-	*/
-	// 使用布隆过滤器进行短链生成检查
-	/*
-		这里再写一个检查在数据库函数的作用：
-		布隆过滤器的的实例是以切片的形式存储在内存中，每次关闭项目布隆过滤器就会被重置
-		如果项目重启，布隆过滤器就会被重置，就难以达到布隆过滤器的持久使用
-	*/
-
+	// 检查是否已存在
 	if Bloom.MightContain(url) {
-		// 可能已经生成过，进行精确检查
 		var shortURL model.Shorturl
-		if err := model.Db.Where("url =?", url).First(&shortURL).Error; err == nil {
-			// 已经生成过，直接返回短链
-			log.Println("已经生成过，直接返回短链")
+		if err := model.Db.Where("url = ?", url).First(&shortURL).Error; err == nil {
 			return errmsg.SUCCESS, shortURL.Shorturl
 		}
 	}
 
-	//if InDb(url) {
-	//	// 已经生成过，直接返回短链
-	//	var shortURL model.Shorturl
-	//	if err := model.Db.Where("url =?", url).First(&shortURL).Error; err == nil {
-	//		// 已经生成过，直接返回短链
-	//		return errmsg.SUCCESS, shortURL.Shorturl
-	//	}
-	//}
+	// 生成雪花ID
+	id, err := flake.NextID()
+	if err != nil {
+		return errmsg.ERROR, ""
+	}
 
-	hash := md5.Sum([]byte(url))
-	shortURLBytes := hash[:]
-	encoded := base64.URLEncoding.EncodeToString(shortURLBytes)
-
-	// 生成新的短链
-	//shortURLStr := GenerateShortURLString(url)
-	shortURLStr := encoded[:8]
+	// 生成短码 (使用Base62编码)
+	shortCode := base62Encode(id)
 
 	// 解析过期时间
 	var expireDuration time.Duration
-	var err error
 	if expiration != "" {
 		expireDuration, err = time.ParseDuration(expiration)
 		if err != nil {
-			// 如果过期时间格式无效，返回错误
 			return errmsg.ERROR_EXPIRATION_ID_WRONG, ""
 		}
 	}
 
-	// 将短链信息存储到 MySQL
+	// 存储到数据库
 	shortURL := model.Shorturl{
-		Shorturl: shortURLStr,
+		ID:       id,        // 存储雪花ID
+		Shorturl: shortCode, // 存储短码
 		Url:      url,
 	}
 	if err := model.Db.Create(&shortURL).Error; err != nil {
-		// 如果存储到MySQL失败，返回错误
-
 		return errmsg.ERROR_FAILED_TO_SAVE_TO_MYSQL, ""
 	}
 
-	// 将短链和原始URL存储到 Redis，并设置过期时间
-	if err := model.Redis.Rdb.Set(model.Redis.Ctx, shortURLStr, url, expireDuration).Err(); err != nil {
-		// 如果存储到Redis失败，返回错误
-
+	// 存储到Redis
+	if err := model.Redis.Rdb.Set(model.Redis.Ctx, shortCode, url, expireDuration).Err(); err != nil {
 		return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
 	}
 
-	// 将原始URL添加到布隆过滤器
 	Bloom.Add(url)
-
-	return errmsg.SUCCESS, shortURLStr
+	return errmsg.SUCCESS, shortCode
 }
 
 // HandleShort 处理短URL，返回原始URL和状态码
 // 该函数首先尝试从Redis中获取原始URL，如果失败则尝试从数据库中获取
 // 如果在Redis和数据库中都找不到短URL，或者出现错误，将返回相应的错误码
-func HandleShort(shortURL string) (code int, OriginalURL string) {
-	//将超时的数据清除
+func HandleShort(shortCode string) (code int, OriginalURL string) {
+	// 清理过期数据
 	DeleteWithTime()
-	// 从 Redis 中查找原始 URL
-	originalURL, err := model.Redis.Rdb.Get(model.Redis.Ctx, shortURL).Result()
-	if err == redis.Nil {
-		// 短链不存在于 Redis 中，可能已过期，去数据库中查找
-		var shortURLRecord model.Shorturl
-		if err := model.Db.Where("shorturl =?", shortURL).First(&shortURLRecord).Error; err == nil {
-			// 从数据库中找到了短链对应的原始 URL
-			originalURL = shortURLRecord.Url
-			// 将其重新添加到 Redis 中，假设设置过期时间为 24 小时，可根据需求修改
-			err = model.Redis.Rdb.Set(model.Redis.Ctx, shortURL, originalURL, time.Hour*24).Err()
-			if err != nil {
-				// Redis 存储失败，返回错误
-				return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
-			}
-			return errmsg.SUCCESS, originalURL
-		} else if err == gorm.ErrRecordNotFound {
-			// 数据库中也不存在该短链，返回错误
-			return errmsg.ERROR_NOT_FOUND_IN_MYSQL, ""
-		} else {
-			// 数据库查询出现其他错误，返回错误
-			return errmsg.ERROR_OTHER_EMS, ""
-		}
-	} else if err != nil {
-		// Redis 查找出现错误，返回错误
-		return errmsg.ERROR, ""
+
+	// 1. 先查Redis
+	originalURL, err := model.Redis.Rdb.Get(model.Redis.Ctx, shortCode).Result()
+	if err == nil {
+		return errmsg.SUCCESS, originalURL
 	}
-	// 重定向到原始 URL
-	return errmsg.SUCCESS, originalURL
+
+	// 2. Redis不存在，查数据库
+	var shortURLRecord model.Shorturl
+	if err := model.Db.Where("shorturl = ?", shortCode).First(&shortURLRecord).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return errmsg.ERROR_NOT_FOUND_IN_MYSQL, ""
+		}
+		return errmsg.ERROR_OTHER_EMS, ""
+	}
+
+	// 3. 重新缓存到Redis (默认24小时)
+	if err := model.Redis.Rdb.Set(model.Redis.Ctx, shortCode, shortURLRecord.Url, 24*time.Hour).Err(); err != nil {
+		return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
+	}
+
+	return errmsg.SUCCESS, shortURLRecord.Url
 }
