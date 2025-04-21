@@ -48,6 +48,13 @@ GET /localhost:8080/{shotURL}
 |shotURL|path|string| 是 |none|
 |Authorization|header|string| 否 |none|
 
+## 雪花算法：
+![img_4.png](img_4.png)
+### 雪花算法的实现原理：
+雪花算法是一种随时间变化的分布式全局唯一ID算法，其生成的ID可以看做是一个64位的正整数，除了最高位，将剩余的63位分别分为41位的时间戳，10位的机器ID以及12位的自增序列号。
+
+我们不采用MySQL的主键自增ID和redsi的incr的自增ID，而是使用本地雪花算法的形式直接生成ID，这样性能更高。
+
 ## Redis
 > 将数据存储在内存上，查询速度极快，可以存放热点数据，减少数据库查询次数<br>
 > [redis的github地址](https://github.com/redis/redis)<br>
