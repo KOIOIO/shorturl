@@ -6,16 +6,20 @@ import (
 	"gorm.io/gorm"
 	model2 "shorturl/modle"
 	"shorturl/utils/errmsg"
-
 	"time"
 )
 
 // Bloom 是一个全局的布隆过滤器实例
 var Bloom = NewBloomFilter()
+
+// flake 是一个全局的雪花ID生成器实例
 var flake = sonyflake.NewSonyflake(sonyflake.Settings{})
 
+// base62Chars 定义了Base62编码使用的字符集
 const base62Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
+// base62Encode 将一个整数转换为Base62编码的字符串
+// 这个函数用于生成短URL的字符串表示
 func base62Encode(num uint64) string {
 	if num == 0 {
 		return string(base62Chars[0])
@@ -30,30 +34,22 @@ func base62Encode(num uint64) string {
 	return string(encoded)
 }
 
-//func GenerateShortURLString(url string) string {
-//        // 使用MD5哈希算法对URL进行哈希计算
-//        hash := md5.Sum([]byte(url))
-//        // 取哈希值的前8个字节作为短URL的字节切片
-//        shortURLBytes := hash[:]
-//        // 使用Base64编码将短URL字节切片转换为字符串
-//        encoded := base64.URLEncoding.EncodeToString(shortURLBytes)
-//        // 返回编码后的字符串的前8个字符作为短URL
-//        return encoded[:8]
-//}
-
+// DeleteWithTime 删除数据库中创建时间超过一个月的记录
+// 这个函数用于定期清理过期的短URL记录
 func DeleteWithTime() {
 	model2.Db.Where("created_at < ?", time.Now().Add(-time.Hour*24*30)).Delete(&model2.Shorturl{})
 }
 
-func InDb(url string) bool {
-	var shortURL model2.Shorturl
-	if err := model2.Db.Where("url =?", url).First(&shortURL).Error; err == nil {
-		// 已经生成过，直接返回短链
-		return true
-	}
-	return false
-}
-
+// GenerateShortURL 生成短URL
+// 参数:
+//
+//	url: 原始URL字符串
+//	expiration: 过期时间字符串，格式如"24h"、"7d"等
+//
+// 返回值:
+//
+//	int: 错误码
+//	string: 生成的短URL字符串
 func GenerateShortURL(url string, expiration string) (int, string) {
 	if url == "" {
 		return errmsg.ERROR_URL_IS_NULL, ""
@@ -105,6 +101,15 @@ func GenerateShortURL(url string, expiration string) (int, string) {
 }
 
 // HandleShort 处理短URL，返回原始URL和状态码
+// 参数:
+//
+//	shortCode: 短URL的字符串表示
+//
+// 返回值:
+//
+//	int: 错误码
+//	string: 原始URL字符串
+//
 // 该函数首先尝试从Redis中获取原始URL，如果失败则尝试从数据库中获取
 // 如果在Redis和数据库中都找不到短URL，或者出现错误，将返回相应的错误码
 func HandleShort(shortCode string) (code int, OriginalURL string) {
