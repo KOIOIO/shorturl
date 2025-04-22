@@ -6,7 +6,8 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	v1 "shorturl/api/v1"
 	_ "shorturl/docs"
-	"shorturl/middleware"
+
+	middleware2 "shorturl/middleware"
 )
 
 // @title           短链生成器
@@ -29,10 +30,10 @@ func InitRouter() {
 	r.Static("/web", "../web")
 
 	// 使用中间件以处理跨域请求
-	r.Use(middleware.Cors())
+	r.Use(middleware2.Cors())
 
 	// 使用日志中间件记录请求信息
-	r.Use(middleware.Logger())
+	r.Use(middleware2.Logger())
 
 	r.POST("/generate", v1.Generate)
 	r.GET("/:shortURL", v1.HandleShortURL)

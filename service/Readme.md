@@ -181,4 +181,6 @@ https://www.bilibili.com/video/BV1Tt4y1772f/?spm_id_from=333.337.search-card.all
 2. 还有一个跨域问题正在解决(写了中间件，也用了cors.Default())
  我用的swagger发现的
 3. ![img_3.png](img_3.png)
- 
+
+例子：
+https://www.google.com/search?q=%E7%89%9B%E5%AE%A2%E8%B0%83%E6%95%B4%E7%AE%80%E5%8E%86%E5%90%84%E4%B8%AA%E6%A8%A1%E5%9D%97%E7%9A%84%E9%A1%BA%E5%BA%8F

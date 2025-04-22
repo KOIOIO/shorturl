@@ -4,9 +4,9 @@ import (
 	"errors"
 	"github.com/sony/sonyflake"
 	"gorm.io/gorm"
-
-	model "shorturl/modle"
+	model2 "shorturl/modle"
 	"shorturl/utils/errmsg"
+
 	"time"
 )
 
@@ -42,12 +42,12 @@ func base62Encode(num uint64) string {
 //}
 
 func DeleteWithTime() {
-	model.Db.Where("created_at < ?", time.Now().Add(-time.Hour*24*30)).Delete(&model.Shorturl{})
+	model2.Db.Where("created_at < ?", time.Now().Add(-time.Hour*24*30)).Delete(&model2.Shorturl{})
 }
 
 func InDb(url string) bool {
-	var shortURL model.Shorturl
-	if err := model.Db.Where("url =?", url).First(&shortURL).Error; err == nil {
+	var shortURL model2.Shorturl
+	if err := model2.Db.Where("url =?", url).First(&shortURL).Error; err == nil {
 		// 已经生成过，直接返回短链
 		return true
 	}
@@ -61,8 +61,8 @@ func GenerateShortURL(url string, expiration string) (int, string) {
 
 	// 检查是否已存在
 	if Bloom.MightContain(url) {
-		var shortURL model.Shorturl
-		if err := model.Db.Where("url = ?", url).First(&shortURL).Error; err == nil {
+		var shortURL model2.Shorturl
+		if err := model2.Db.Where("url = ?", url).First(&shortURL).Error; err == nil {
 			return errmsg.SUCCESS, shortURL.Shorturl
 		}
 	}
@@ -86,17 +86,17 @@ func GenerateShortURL(url string, expiration string) (int, string) {
 	}
 
 	// 存储到数据库
-	shortURL := model.Shorturl{
+	shortURL := model2.Shorturl{
 		ID:       id,        // 存储雪花ID
 		Shorturl: shortCode, // 存储短码
 		Url:      url,
 	}
-	if err := model.Db.Create(&shortURL).Error; err != nil {
+	if err := model2.Db.Create(&shortURL).Error; err != nil {
 		return errmsg.ERROR_FAILED_TO_SAVE_TO_MYSQL, ""
 	}
 
 	// 存储到Redis
-	if err := model.Redis.Rdb.Set(model.Redis.Ctx, shortCode, url, expireDuration).Err(); err != nil {
+	if err := model2.Redis.Rdb.Set(model2.Redis.Ctx, shortCode, url, expireDuration).Err(); err != nil {
 		return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
 	}
 
@@ -112,14 +112,14 @@ func HandleShort(shortCode string) (code int, OriginalURL string) {
 	DeleteWithTime()
 
 	// 1. 先查Redis
-	originalURL, err := model.Redis.Rdb.Get(model.Redis.Ctx, shortCode).Result()
+	originalURL, err := model2.Redis.Rdb.Get(model2.Redis.Ctx, shortCode).Result()
 	if err == nil {
 		return errmsg.SUCCESS, originalURL
 	}
 
 	// 2. Redis不存在，查数据库
-	var shortURLRecord model.Shorturl
-	if err := model.Db.Where("shorturl = ?", shortCode).First(&shortURLRecord).Error; err != nil {
+	var shortURLRecord model2.Shorturl
+	if err := model2.Db.Where("shorturl = ?", shortCode).First(&shortURLRecord).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return errmsg.ERROR_NOT_FOUND_IN_MYSQL, ""
 		}
@@ -127,7 +127,7 @@ func HandleShort(shortCode string) (code int, OriginalURL string) {
 	}
 
 	// 3. 重新缓存到Redis (默认24小时)
-	if err := model.Redis.Rdb.Set(model.Redis.Ctx, shortCode, shortURLRecord.Url, 24*time.Hour).Err(); err != nil {
+	if err := model2.Redis.Rdb.Set(model2.Redis.Ctx, shortCode, shortURLRecord.Url, 24*time.Hour).Err(); err != nil {
 		return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
 	}
 

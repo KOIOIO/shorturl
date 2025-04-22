@@ -1,13 +1,13 @@
 package main
 
 import (
-	model "shorturl/modle"
+	model2 "shorturl/modle"
 	"shorturl/routers"
 )
 
 func main() {
 
-	model.InitRedis()
-	model.InitDb()
+	model2.InitRedis()
+	model2.InitDb()
 	routers.InitRouter()
 }
