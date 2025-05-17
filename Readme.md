@@ -49,7 +49,7 @@ GET /localhost:8080/{shotURL}
 |Authorization|header|string| 否 |none|
 
 ## 雪花算法：
-![img_4.png](img_4.png)
+![img_4.png](service/img_4.png)
 ### 雪花算法的实现原理：
 雪花算法是一种随时间变化的分布式全局唯一ID算法，其生成的ID可以看做是一个64位的正整数，除了最高位，将剩余的63位分别分为41位的时间戳，10位的机器ID以及12位的自增序列号。
 
@@ -105,7 +105,7 @@ if err := model.Db.Where("shorturl =?", shortURL).First(&shortURLRecord).Error; 
 3. 很难删除元素
 
 > #### 布隆过滤器出现误判的原因
-> ![误判原因](image.png)
+> ![误判原因](service/image.png)
 
 ## short-url\server\server.go 服务层
 
@@ -119,7 +119,7 @@ if err := model.Db.Where("shorturl =?", shortURL).First(&shortURLRecord).Error; 
 > 5. 存储短链信息：将短链信息存储到MySQL，并将短链和原始URL存储到Redis中，同时设置过期时间。
 > 6. 更新布隆过滤器：将原始URL添加到布隆过滤器。
      
-![gerenerateShortURL](img.png)
+![gerenerateShortURL](service/img.png)
 
 ### HandlerURL(获取短链接并跳转)
 > #### 工作流程
@@ -130,7 +130,7 @@ if err := model.Db.Where("shorturl =?", shortURL).First(&shortURLRecord).Error; 
 > 3. 处理结果：
         1. 如果在Redis或数据库中找到原始URL，返回成功并重定向到原始URL。
         2. 如果未找到或出现错误，返回相应的错误码。
-![HandlerURL](img_1.png)
+![HandlerURL](service/img_1.png)
 
 ## 特殊的
 
@@ -174,13 +174,13 @@ if Bloom.MightContain(url) {
 # 问题
 1. 前端还没链接，不过也是写了个简单的 
 > web/index.html
-   ![img_2.png](img_2.png)
+   ![img_2.png](service/img_2.png)
 前后端交互我在看这个视频，这个是后端学前端的
 https://www.bilibili.com/video/BV1Tt4y1772f/?spm_id_from=333.337.search-card.all.click
    > 准备看到vue2，寒假把js之前看完就行了。。。
 2. 还有一个跨域问题正在解决(写了中间件，也用了cors.Default())
  我用的swagger发现的
-3. ![img_3.png](img_3.png)
+3. ![img_3.png](service/img_3.png)
 
 例子：
 https://www.google.com/search?q=%E7%89%9B%E5%AE%A2%E8%B0%83%E6%95%B4%E7%AE%80%E5%8E%86%E5%90%84%E4%B8%AA%E6%A8%A1%E5%9D%97%E7%9A%84%E9%A1%BA%E5%BA%8F
