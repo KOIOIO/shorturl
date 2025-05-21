@@ -22,9 +22,9 @@ func InitRedis() {
 	Redis = &Rediscli{}
 	Redis.Ctx = context.Background()
 	Redis.Rdb = redis.NewClient(&redis.Options{
-		Addr:     utils.RedisHost + utils.RedisPort,
-		Password: utils.RedisPassword, // no password set
-		DB:       0,                   // use default DB
+		Addr:     utils.RedisConfig.RedisHost + utils.RedisConfig.RedisPort,
+		Password: utils.RedisConfig.RedisPassword, // no password set
+		DB:       0,                               // use default DB
 	})
 
 	pong, err := Redis.Rdb.Ping(Redis.Ctx).Result()

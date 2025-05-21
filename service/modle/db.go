@@ -22,11 +22,11 @@ var err error
 func InitDb() {
 	// 构建数据库连接字符串
 	dns := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		utils.DbUser,
-		utils.DbPassWord,
-		utils.DbHost,
-		utils.DbPort,
-		utils.DbName,
+		utils.DatabaseConfig.DbUser,
+		utils.DatabaseConfig.DbPassWord,
+		utils.DatabaseConfig.DbHost,
+		utils.DatabaseConfig.DbPort,
+		utils.DatabaseConfig.DbName,
 	)
 	// 打开数据库连接并配置gorm
 	Db, err = gorm.Open(mysql.Open(dns), &gorm.Config{
