@@ -2,12 +2,13 @@ package middleware
 
 import (
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	retalog "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
-	"os"
-	"time"
 )
 
 // Logger 日志中间件
