@@ -1,4 +1,4 @@
-package server
+package repository
 
 import (
 	"crypto/md5"
@@ -61,3 +61,6 @@ func (bf *BloomFilter) getHashIndices(url string) []int {
 	}
 	return hashes
 }
+
+// Bloom 是一个全局的布隆过滤器实例
+var Bloom = NewBloomFilter()
