@@ -22,7 +22,7 @@ import (
 
 // @externalDocs.description  OpenAPI
 // @externalDocs.url          https://swagger.io/resources/open-api/
-func InitRouter() {
+func InitRouter() *gin.Engine {
 	// 创建默认的gin路由器
 	r := gin.Default()
 
@@ -48,4 +48,5 @@ func InitRouter() {
 	} else {
 		println("服务启动成功")
 	}
+	return r
 }

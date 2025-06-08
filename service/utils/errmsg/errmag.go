@@ -15,6 +15,9 @@ const (
 
 	ERROR_URL_IS_NULL         = 3001
 	ERROR_EXPIRATION_ID_WRONG = 3002
+
+	//BloomFliter
+	ERROR_FAILED_TO_ADD_TO_BLOOM = 4001
 )
 
 var errmsg = map[int]string{
