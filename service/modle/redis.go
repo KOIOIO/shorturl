@@ -2,9 +2,10 @@ package model
 
 import (
 	"context"
-	"github.com/go-redis/redis/v8"
 	"log"
 	"shorturl/utils"
+
+	"github.com/go-redis/redis/v8"
 )
 
 // 创建一个Redis操作的结构体用于后续对redis的操作
@@ -30,7 +31,6 @@ func InitRedis() {
 	pong, err := Redis.Rdb.Ping(Redis.Ctx).Result()
 	if err != nil {
 		panic(err)
-		return
 	}
 	log.Printf("connect redis success, pong=%s\n", pong)
 }

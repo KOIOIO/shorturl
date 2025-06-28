@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package shortUrl;
+
+option go_package = "./shortUrl";
+message GenerateShortUrlRequest {
+    string url = 1;
+    string expiration = 2;
+}
+
+message GenerateShortUrlResponse {
+    int32 code = 1;
+    string shortcode=2;
+}
+
+message HandleShortRequest {
+    string shortcode = 1;
+}
+
+message HandleShortResponse {
+    int32 code = 1;
+    string longUrl = 2;
+}
+service ShortUrl {
+    rpc GenerateShortUrl (GenerateShortUrlRequest) returns (GenerateShortUrlResponse) {}
+    rpc HandleShort (HandleShortRequest) returns (HandleShortResponse) {}
+}

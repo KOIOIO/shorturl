@@ -1,0 +1,2 @@
+time="2025-06-26 10:07:43" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0" DataSize=71 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=POST Path=/generate SpendTime="31 ms" status=200
+time="2025-06-26 10:07:44" level=info Agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0" DataSize=90 HostName=LAPTOP-BJJ1PKI9 Ip="::1" Method=GET Path=/gJ6y5HjYQb SpendTime="4 ms" status=301

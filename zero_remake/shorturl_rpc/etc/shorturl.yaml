@@ -1,0 +1,20 @@
+Name: shorturl.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: shorturl.rpc
+
+Mysql:
+  DbUser: root
+  DbPort: "3306"
+  DbPass: wwy040609
+  DbName: shorturl
+  DbHost: localhost
+
+BizRedis:
+  RedisHost: 127.0.0.1
+  RedisPort: "6379"
+  RedisPass: ""
+  RedisDB: 0
+
