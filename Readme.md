@@ -1,22 +1,32 @@
 # 短链生成项目
-## 1.配置文件选择***ini***
+
+- 本项目分为两个版本：
+- 1. gin框架的单体版本：short-url/service
+- 2. go-zero框架的微服务版本：short-url/zero_remake
+
+Readme文档根据**微服务**版本编写
+
+## 1.配置文件选择***yaml***
 ```
-[server]
-AppMode = debug
-HttpPort = 8080
+Name: shorturl.rpc
+ListenOn: 0.0.0.0:8888
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: shorturl.rpc
 
-[database]
-Db = mysql
-DbHost = localhost
-DbPort = 3306
-DbUser = root
-DbPass =wwy040609
-DbName = shorturl
+Mysql:
+  DbUser: root
+  DbPort: "3306"
+  DbPass: wwy040609
+  DbName: shorturl
+  DbHost: localhost
 
-[redis]
-RedisHost = 127.0.0.1
-RedisPort = :6379
-RedisPassword =
+BizRedis:
+  RedisHost: 127.0.0.1
+  RedisPort: "6379"
+  RedisPass: ""
+  RedisDB: 0
 ```
 
 ## 接口文档
@@ -71,20 +81,15 @@ GET /localhost:8080/{shotURL}
 1. 本次Redis中的键值对都是以**字符串**形式进行存储的
 2. 本次Redis第一次可以自己设定时间，当Redis中的数据因为expiration设置到期而消失时，如果继续从数据库中可以获取时间，那么自动将其添加到缓存中从新设置为24h
 ```go
-if err := model.Db.Where("shorturl =?", shortURL).First(&shortURLRecord).Error; err == nil {
-			// 从数据库中找到了短链对应的原始 URL
-			originalURL = shortURLRecord.Url
-			// 将其重新添加到 Redis 中，假设设置过期时间为 24 小时，可根据需求修改
-			err = model.Redis.Rdb.Set(model.Redis.Ctx, shortURL, originalURL, time.Hour*24).Err()
-			if err != nil {
-				// Redis 存储失败，返回错误
-				return errmsg.ERROR_FAILED_SAVE_TO_REDIS, ""
-			}
-			return errmsg.SUCCESS, originalURL
-		}
+if err := l.svcCtx.Redis.Rdb.Set(l.svcCtx.Redis.Ctx, shortCode, in.Url, expireDuration).Err(); err != nil {
+		return &shortUrl.GenerateShortUrlResponse{
+			Code:      errmsg.ERROR_FAILED_SAVE_TO_REDIS,
+			Shortcode: "",
+		}, errors.New("Fail to save to redis")
+	}
 ```
 ## 布隆过滤器
-> Bloom Filter：short-url/server/BoomFilter.go
+> Bloom Filter：short-url/zero_remake/shorturl_rpc/internal/logic/repository/BoomFilter.go
 
 ### 作用
 1. 布隆过滤过滤器通过hash存储可以快速判断数据是否已经存在
@@ -136,8 +141,12 @@ if err := model.Db.Where("shorturl =?", shortURL).First(&shortURLRecord).Error; 
 
 ### 对于存在超过一个月的数据，会自动在数据库中删除
 ```go
-func DeleteWithTime() {
-	model.Db.Where("created_at < ?", time.Now().Add(-time.Hour*24*30)).Delete(&model.Shorturl{})
+func (l *HandleShortLogic) DeleteWithTime() error {
+	err := l.svcCtx.DB.Where("created_at < ?", time.Now().Add(-time.Hour*24*30)).Delete(&models.Shorturl{}).Error
+	if err != nil {
+		return err
+	}
+	return nil
 }
 ```
 
