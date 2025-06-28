@@ -1,6 +1,7 @@
 package main
 
 import (
+	"example.com/shorturl/short-url/zero_remake/middleware"
 	"flag"
 	"fmt"
 
@@ -32,6 +33,10 @@ func main() {
 			reflection.Register(grpcServer)
 		}
 	})
+
+	s.AddUnaryInterceptors(middleware.UnaryServerLogger())
+	s.AddStreamInterceptors(middleware.StreamServerLogger())
+
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
