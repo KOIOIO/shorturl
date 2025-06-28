@@ -1,0 +1,64 @@
+package middleware
+
+import (
+	"context"
+	"time"
+
+	"github.com/sirupsen/logrus"
+	"google.golang.org/grpc"
+)
+
+// UnaryServerLogger 创建一元RPC调用的日志拦截器
+func UnaryServerLogger() grpc.UnaryServerInterceptor {
+	logger := initLogger() // 复用之前创建的日志初始化函数
+
+	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+		startTime := time.Now()
+
+		// 调用实际的处理方法
+		resp, err = handler(ctx, req)
+
+		// 计算处理时间
+		duration := time.Since(startTime)
+
+		// 记录日志
+		entry := logger.WithFields(logrus.Fields{
+			"method":   info.FullMethod,
+			"duration": duration.String(),
+		})
+
+		if err != nil {
+			entry.WithField("error", err.Error()).Error("RPC call failed")
+		} else {
+			entry.Info("RPC call succeeded")
+		}
+
+		return resp, err
+	}
+}
+
+// StreamServerLogger 创建流式RPC调用的日志拦截器
+func StreamServerLogger() grpc.StreamServerInterceptor {
+	logger := initLogger()
+
+	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+		startTime := time.Now()
+
+		err := handler(srv, ss)
+
+		duration := time.Since(startTime)
+
+		entry := logger.WithFields(logrus.Fields{
+			"method":   info.FullMethod,
+			"duration": duration.String(),
+		})
+
+		if err != nil {
+			entry.WithField("error", err.Error()).Error("Stream RPC call failed")
+		} else {
+			entry.Info("Stream RPC call succeeded")
+		}
+
+		return err
+	}
+}
