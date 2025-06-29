@@ -10,9 +10,10 @@ import (
 )
 
 type ServiceContext struct {
-	Config config.Config
-	DB     *gorm.DB
-	Redis  *init_redis.Rediscli
+	Config  config.Config
+	DB      *gorm.DB
+	Redis   *init_redis.Rediscli
+	LogPath string
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -28,8 +29,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	rds, _ := init_redis.InitRedis(c.BizRedis.RedisHost, c.BizRedis.RedisPort, c.BizRedis.RedisPass, 0.)
 
 	return &ServiceContext{
-		Config: c,
-		DB:     db,
-		Redis:  rds,
+		Config:  c,
+		DB:      db,
+		Redis:   rds,
+		LogPath: c.Log.Path,
 	}
 }

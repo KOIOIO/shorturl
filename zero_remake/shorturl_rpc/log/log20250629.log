@@ -1,0 +1,10 @@
+time="2025-06-29 18:20:50" level=info msg="RPC call succeeded" duration=72.7492ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-06-29 18:20:51" level=info msg="RPC call succeeded" duration=8.8768ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-06-29 18:21:30" level=info msg="RPC call succeeded" duration=15.5969ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-06-29 18:21:42" level=info msg="RPC call succeeded" duration=14.2795ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-06-29 18:21:44" level=info msg="RPC call succeeded" duration=2.7972ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-06-29 18:22:13" level=info msg="RPC call succeeded" duration=14.0014ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-06-29 18:22:14" level=info msg="RPC call succeeded" duration=2.3563ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-06-29 18:23:48" level=info msg="RPC call succeeded" duration=14.3314ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-06-29 19:21:04" level=info msg="RPC call succeeded" duration=40.5002ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-06-29 19:21:06" level=info msg="RPC call succeeded" duration=5.1917ms method=/shortUrl.ShortUrl/HandleShort

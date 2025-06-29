@@ -24,7 +24,7 @@ func main() {
 	defer server.Stop()
 
 	server.Use(middleware.CorsMiddleware())
-	server.Use(middleware.LoggerMiddleware())
+	server.Use(middleware.LoggerMiddleware(c.Log.Path))
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)

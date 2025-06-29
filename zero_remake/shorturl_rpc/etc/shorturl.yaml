@@ -18,3 +18,6 @@ BizRedis:
   RedisPass: ""
   RedisDB: 0
 
+log:
+  path: log/log
+

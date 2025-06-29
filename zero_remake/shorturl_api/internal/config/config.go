@@ -8,4 +8,7 @@ import (
 type Config struct {
 	rest.RestConf
 	ShortUrlRpc zrpc.RpcClientConf
+	log         struct {
+		path string
+	}
 }

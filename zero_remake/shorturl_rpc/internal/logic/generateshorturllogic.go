@@ -55,7 +55,7 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 		return &shortUrl.GenerateShortUrlResponse{
 			Code:      errmsg.ERROR,
 			Shortcode: "",
-		}, errors.New("Fail ro generate id")
+		}, errors.New("Fail to generate id")
 	}
 
 	shortCode := repository.Base62Encode(id)

@@ -19,4 +19,7 @@ type Config struct {
 		DbName string
 		DbHost string
 	}
+	log struct {
+		path string
+	}
 }

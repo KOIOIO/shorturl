@@ -9,11 +9,13 @@ import (
 type ServiceContext struct {
 	Config      config.Config
 	ShortUrlRpc shorturlclient.ShortUrl
+	LogPath     string
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:      c,
 		ShortUrlRpc: shorturlclient.NewShortUrl(zrpc.MustNewClient(c.ShortUrlRpc)),
+		LogPath:     c.Log.Path,
 	}
 }

@@ -13,9 +13,9 @@ import (
 )
 
 // LoggerMiddleware 创建GoZero日志中间件
-func LoggerMiddleware() rest.Middleware {
+func LoggerMiddleware(path string) rest.Middleware {
 	// 初始化日志配置
-	logger := initLogger()
+	logger := initLogger(path)
 
 	return func(next http.HandlerFunc) http.HandlerFunc {
 		return func(w http.ResponseWriter, r *http.Request) {
@@ -67,8 +67,8 @@ func LoggerMiddleware() rest.Middleware {
 }
 
 // 初始化日志记录器
-func initLogger() *logrus.Logger {
-	filePath := "log/log"
+func initLogger(path string) *logrus.Logger {
+	filePath := path
 
 	// 确保日志目录存在
 	if err := os.MkdirAll("log", 0755); err != nil {

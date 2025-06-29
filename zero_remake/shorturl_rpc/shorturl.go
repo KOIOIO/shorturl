@@ -34,8 +34,8 @@ func main() {
 		}
 	})
 
-	s.AddUnaryInterceptors(middleware.UnaryServerLogger())
-	s.AddStreamInterceptors(middleware.StreamServerLogger())
+	s.AddUnaryInterceptors(middleware.UnaryServerLogger(c.Log.Path))
+	s.AddStreamInterceptors(middleware.StreamServerLogger(c.Log.Path))
 
 	defer s.Stop()
 

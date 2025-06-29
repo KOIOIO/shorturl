@@ -9,8 +9,8 @@ import (
 )
 
 // UnaryServerLogger 创建一元RPC调用的日志拦截器
-func UnaryServerLogger() grpc.UnaryServerInterceptor {
-	logger := initLogger() // 复用之前创建的日志初始化函数
+func UnaryServerLogger(path string) grpc.UnaryServerInterceptor {
+	logger := initLogger(path) // 复用之前创建的日志初始化函数
 
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		startTime := time.Now()
@@ -38,8 +38,8 @@ func UnaryServerLogger() grpc.UnaryServerInterceptor {
 }
 
 // StreamServerLogger 创建流式RPC调用的日志拦截器
-func StreamServerLogger() grpc.StreamServerInterceptor {
-	logger := initLogger()
+func StreamServerLogger(path string) grpc.StreamServerInterceptor {
+	logger := initLogger(path)
 
 	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		startTime := time.Now()
