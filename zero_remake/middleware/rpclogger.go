@@ -54,9 +54,9 @@ func StreamServerLogger(path string) grpc.StreamServerInterceptor {
 		})
 
 		if err != nil {
-			entry.WithField("error", err.Error()).Error("Stream RPC call failed")
+			entry.WithField("error", err.Error()).Error("RPC服务响应失败")
 		} else {
-			entry.Info("Stream RPC call succeeded")
+			entry.Info("RPC服务响应成功")
 		}
 
 		return err
