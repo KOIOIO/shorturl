@@ -3,8 +3,9 @@ package init_redis
 import (
 	"context"
 	"fmt"
-	"github.com/go-redis/redis/v8"
 	"log"
+
+	"github.com/go-redis/redis/v8"
 )
 
 // 创建一个Redis操作的结构体用于后续对redis的操作
@@ -36,5 +37,3 @@ func InitRedis(RedisHost string, RedisPort string, RedisPassword string, RedisDB
 	log.Printf("connect redis success")
 	return Redis, nil
 }
-
-// ... existing code ...

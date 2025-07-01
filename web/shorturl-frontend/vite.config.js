@@ -5,7 +5,6 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     host: '0.0.0.0',
-    port: 5173,
-    allowedHosts: [`nrxz47.natappfree.cc`], // 💡这里加你的 natapp 域名
+    port: 5173
   }
 })
