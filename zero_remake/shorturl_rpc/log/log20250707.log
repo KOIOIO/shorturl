@@ -1,0 +1,16 @@
+time="2025-07-07 10:30:36" level=info msg="RPC call succeeded" duration=42.1092ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 10:30:38" level=info msg="RPC call succeeded" duration=6.1238ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 10:33:49" level=error msg="RPC call failed" duration=19.5473ms error="Fail to save to mysql" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 10:34:29" level=info msg="RPC call succeeded" duration=22.4417ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 10:34:31" level=info msg="RPC call succeeded" duration=2.8553ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 10:34:31" level=info msg="RPC call succeeded" duration=6.8803ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 10:34:35" level=info msg="RPC call succeeded" duration=2.986ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 10:34:35" level=info msg="RPC call succeeded" duration=4.2014ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 10:36:11" level=info msg="RPC call succeeded" duration=41.9392ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 10:36:12" level=info msg="RPC call succeeded" duration=1.8849ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 13:49:48" level=info msg="RPC call succeeded" duration=22.5482ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 13:49:49" level=info msg="RPC call succeeded" duration=1.1459ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 13:49:50" level=info msg="RPC call succeeded" duration=6.6271ms method=/shortUrl.ShortUrl/HandleShort
+time="2025-07-07 13:50:02" level=info msg="RPC call succeeded" duration=17.1783ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 13:50:03" level=info msg="RPC call succeeded" duration=1.2603ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-07 13:50:04" level=info msg="RPC call succeeded" duration=2.8719ms method=/shortUrl.ShortUrl/HandleShort

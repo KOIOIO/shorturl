@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"math/rand"
 	"mime/multipart"
 	"net/http"
 	"sync"
@@ -20,7 +19,7 @@ func goroutine1(id int, wg *sync.WaitGroup) {
 	for i := 0; i < 1000; i++ { // 每个协程发送100次请求，可自行调整
 		payload := &bytes.Buffer{}
 		writer := multipart.NewWriter(payload)
-		longUrl := fmt.Sprintf("https://example.com/page/%d?rand=%d", i, rand.Intn(1000000))
+		longUrl := fmt.Sprintf("ai.com")
 		_ = writer.WriteField("url", longUrl)
 		_ = writer.WriteField("expiration", "1h")
 		err := writer.Close()

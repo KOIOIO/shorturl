@@ -14,6 +14,7 @@ type Rediscli struct {
 	Rdb *redis.Client   // Redis客户端，用于执行Redis命令
 }
 
+
 // 创建一个全局变量，用于后续对redis的操作
 //var Redis *Rediscli
 
@@ -37,3 +38,4 @@ func InitRedis(RedisHost string, RedisPort string, RedisPassword string, RedisDB
 	log.Printf("connect redis success")
 	return Redis, nil
 }
+
