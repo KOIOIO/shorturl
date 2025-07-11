@@ -51,12 +51,13 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 		}
 	}
 
-	id, err := repository.Flake.NextID()
+	// 生成短链ID
+	id, err := repository.GetMyFlake().NextID()
 	if err != nil {
 		return &shortUrl.GenerateShortUrlResponse{
 			Code:      errmsg.ERROR,
 			Shortcode: "",
-		}, errors.New("Fail to generate id")
+		}, errors.New("ID生成失败")
 	}
 
 	shortCode := repository.Base62Encode(id)
