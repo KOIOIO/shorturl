@@ -1,19 +1,20 @@
 package svc
 
 import (
-	"example.com/shorturl/short-url/zero_remake/common/init_redis"
-	"fmt"
-
 	"example.com/shorturl/short-url/zero_remake/common/init_gorm"
+	"example.com/shorturl/short-url/zero_remake/common/init_redis"
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/config"
+	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/logic/repository"
+	"fmt"
 	"gorm.io/gorm"
 )
 
 type ServiceContext struct {
-	Config  config.Config
-	DB      *gorm.DB
-	Redis   *init_redis.Rediscli
-	LogPath string
+	Config     config.Config
+	DB         *gorm.DB
+	Redis      *init_redis.Rediscli
+	LogPath    string
+	RedisBloom *repository.RedisBloom
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -26,12 +27,13 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	)
 	db := init_gorm.Init_gorm(dns)
 
-	rds, _ := init_redis.InitRedis(c.BizRedis.RedisHost, c.BizRedis.RedisPort, c.BizRedis.RedisPass, 0.)
-
+	rds, _ := init_redis.InitRedis(c.BizRedis.RedisHost, c.BizRedis.RedisPort, c.BizRedis.RedisPass, 0)
+	redisbloom := repository.NewRedisBloom(rds.Rdb, "shorturl:Bloom")
 	return &ServiceContext{
-		Config:  c,
-		DB:      db,
-		Redis:   rds,
-		LogPath: c.Log.Path,
+		Config:     c,
+		DB:         db,
+		Redis:      rds,
+		LogPath:    c.Log.Path,
+		RedisBloom: redisbloom,
 	}
 }

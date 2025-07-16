@@ -40,6 +40,17 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 			Shortcode: "",
 		}, errors.New("url is null")
 	}
+	// todo redis的布隆过滤器模块
+	// exist, err := l.svcCtx.RedisBloom.MightContain(in.Url)
+	// if exist {
+	// 	shortcode, err := l.ReadFormMysql(in.Url)
+	// 	if err == nil && shortcode != nil {
+	// 		return &shortUrl.GenerateShortUrlResponse{
+	// 			Code:      errmsg.SUCCESS,
+	// 			Shortcode: shortcode.Shorturl,
+	// 		}, nil
+	// 	}
+	// }
 
 	if repository.Bloom.MightContain(in.Url) {
 		shortcode, err := l.ReadFormMysql(in.Url)
