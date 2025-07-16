@@ -18,6 +18,9 @@ const (
 
 	//BloomFliter
 	ERROR_FAILED_TO_ADD_TO_BLOOM = 4001
+
+	//Limit
+	ERROR_RATE_LIMIT = 5001
 )
 
 var errmsg = map[int]string{
@@ -29,6 +32,7 @@ var errmsg = map[int]string{
 	ERROR_URL_IS_NULL:             "URL为空",
 	ERROR_EXPIRATION_ID_WRONG:     "过期时间错误",
 	ERROR_FAILED_TO_SAVE_TO_MYSQL: "MYSQL中保存失败",
+	ERROR_RATE_LIMIT:              "请求过于频繁，请稍后再试",
 }
 
 func GetErrMsg(code int) string {

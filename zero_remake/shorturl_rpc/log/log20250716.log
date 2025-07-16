@@ -111,3 +111,94 @@ time="2025-07-16 20:01:42" level=info msg="RPC call succeeded" duration=2.4408ms
 time="2025-07-16 20:01:42" level=info msg="RPC call succeeded" duration=19.1943ms method=/shortUrl.ShortUrl/GenerateShortUrl
 time="2025-07-16 20:01:43" level=info msg="RPC call succeeded" duration=2.9858ms method=/shortUrl.ShortUrl/GenerateShortUrl
 time="2025-07-16 20:01:43" level=info msg="RPC call succeeded" duration=4.0183ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:26" level=info msg="RPC call succeeded" duration=21.4877ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:27" level=info msg="RPC call succeeded" duration=2.7033ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:27" level=info msg="RPC call succeeded" duration=2.0868ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:27" level=info msg="RPC call succeeded" duration=2.953ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:27" level=info msg="RPC call succeeded" duration=2.2581ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:28" level=info msg="RPC call succeeded" duration=2.1855ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:28" level=info msg="RPC call succeeded" duration=2.6832ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:28" level=info msg="RPC call succeeded" duration=2.1261ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:28" level=info msg="RPC call succeeded" duration="550.9µs" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:28" level=info msg="RPC call succeeded" duration=2.1747ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:28" level=info msg="RPC call succeeded" duration=2.8742ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:29" level=info msg="RPC call succeeded" duration=2.5578ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:29" level=info msg="RPC call succeeded" duration=2.5755ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:29" level=info msg="RPC call succeeded" duration=3.8058ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:29" level=info msg="RPC call succeeded" duration=2.0508ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:29" level=info msg="RPC call succeeded" duration=6.4933ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:30" level=info msg="RPC call succeeded" duration=3.0274ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:30" level=info msg="RPC call succeeded" duration=2.6064ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:30" level=info msg="RPC call succeeded" duration=2.7536ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:30" level=info msg="RPC call succeeded" duration=3.4039ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:30" level=info msg="RPC call succeeded" duration=1.9618ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:31" level=info msg="RPC call succeeded" duration=2.1154ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:31" level=info msg="RPC call succeeded" duration=2.598ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:31" level=info msg="RPC call succeeded" duration=2.3125ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:31" level=info msg="RPC call succeeded" duration=2.7966ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:31" level=info msg="RPC call succeeded" duration=2.549ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:32" level=info msg="RPC call succeeded" duration=3.2327ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:32" level=info msg="RPC call succeeded" duration=2.6901ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:32" level=info msg="RPC call succeeded" duration=2.6656ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:32" level=info msg="RPC call succeeded" duration=2.688ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:32" level=info msg="RPC call succeeded" duration=3.0096ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:32" level=info msg="RPC call succeeded" duration=2.0631ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:33" level=info msg="RPC call succeeded" duration=2.7799ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:33" level=info msg="RPC call succeeded" duration=2.3849ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:33" level=info msg="RPC call succeeded" duration=2.2333ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:53" level=info msg="RPC call succeeded" duration=20.6841ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:53" level=info msg="RPC call succeeded" duration=2.1843ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:53" level=info msg="RPC call succeeded" duration=1.7883ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:24:54" level=info msg="RPC call succeeded" duration=1.8388ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:32:31" level=info msg="RPC call succeeded" duration=30.3368ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:32:32" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:32:34" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:34" level=info msg="RPC call succeeded" duration=3.0285ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:34" level=info msg="RPC call succeeded" duration=3.0796ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:34" level=info msg="RPC call succeeded" duration=2.7913ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:34" level=info msg="RPC call succeeded" duration=2.5005ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:35" level=info msg="RPC call succeeded" duration=2.347ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:35" level=info msg="RPC call succeeded" duration=2.0951ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:35" level=info msg="RPC call succeeded" duration=2.1071ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:35" level=info msg="RPC call succeeded" duration=3.416ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:35" level=info msg="RPC call succeeded" duration=1.9684ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:35" level=info msg="RPC call succeeded" duration=2.0261ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=3.9818ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=19.6687ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=2.789ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=2.3046ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=1.908ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=3.1905ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:36" level=info msg="RPC call succeeded" duration=2.724ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:37" level=info msg="RPC call succeeded" duration=3.1076ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:37" level=info msg="RPC call succeeded" duration=2.5666ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:37" level=info msg="RPC call succeeded" duration=1.8304ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:33:37" level=info msg="RPC call succeeded" duration=1.8995ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:40:53" level=info msg="RPC call succeeded" duration=26.7179ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:40:53" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:40:56" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:41:03" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:41:31" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:42:18" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:42:23" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:42:28" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:42:50" level=info msg="RPC call succeeded" duration=7.8894ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:42:51" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:42:58" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:44:50" level=info msg="RPC call succeeded" duration=41.2516ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:44:51" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:49:58" level=info msg="RPC call succeeded" duration=24.8141ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:49:59" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:52:06" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:52:08" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:53:21" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:54:12" level=info msg="RPC call succeeded" duration=19.7321ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:54:13" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:54:17" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:54:20" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:55:27" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:57:05" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:57:08" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:57:11" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:57:36" level=info msg="RPC call succeeded" duration=42.1237ms method=/shortUrl.ShortUrl/GenerateShortUrl
+time="2025-07-16 20:57:37" level=error msg="RPC call failed" duration=0s error="rate limit exceeded" method=/shortUrl.ShortUrl/GenerateShortUrl

@@ -3,15 +3,16 @@ package logic
 import (
 	"context"
 	"errors"
+	"strconv"
+	"strings"
+	"time"
+
+	limite_processer "example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/logic/limit_processer"
 
 	"example.com/shorturl/short-url/zero_remake/common/errmsg"
 	"example.com/shorturl/short-url/zero_remake/models"
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/logic/repository"
 	"gorm.io/gorm"
-
-	"strconv"
-	"strings"
-	"time"
 
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/svc"
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/types/shortUrl"
@@ -34,6 +35,14 @@ func NewGenerateShortUrlLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRequest) (*shortUrl.GenerateShortUrlResponse, error) {
+	ip := limite_processer.GetClientIP(l.ctx)
+	if !limite_processer.AllowIP(ip) {
+		return &shortUrl.GenerateShortUrlResponse{
+			Code:      errmsg.ERROR_RATE_LIMIT,
+			Shortcode: "",
+		}, errors.New("rate limit exceeded")
+	}
+
 	if in.Url == "" {
 		return &shortUrl.GenerateShortUrlResponse{
 			Code:      errmsg.ERROR_URL_IS_NULL,

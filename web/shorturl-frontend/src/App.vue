@@ -53,7 +53,27 @@ const generateShortURL = async () => {
 
     shortUrl.value = `http://localhost:8080/${response.data.short_url}`
   } catch (error) {
-    alert('生成失败，请检查输入！')
+    let isRateLimited = false
+    // 兼容后端 HTTP 500 且 code 字段不存在的情况
+    if (error.response) {
+      const data = error.response.data
+      // code 字段优先判断
+      if (data && String(data.code) === '5001') {
+        alert('为防止数据库崩溃，请半个小时后再生成')
+        isRateLimited = true
+      } else if (error.response.status === 500 && error.response.statusText === 'Internal Server Error') {
+        // 兼容后端直接返回500错误
+        alert('为防止数据库崩溃，请半个小时后再生成')
+        isRateLimited = true
+      } else if (typeof data === 'string' && data.includes('rate limit')) {
+        // 兼容后端直接返回字符串错误
+        alert('为防止数据库崩溃，请半个小时后再生成')
+        isRateLimited = true
+      }
+    }
+    if (!isRateLimited) {
+      alert('生成失败，请检查输入！')
+    }
   } finally {
     loading.value = false
   }
