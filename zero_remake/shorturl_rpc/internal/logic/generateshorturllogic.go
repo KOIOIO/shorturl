@@ -41,8 +41,11 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 		}, errors.New("url is null")
 	}
 
-	// 先用布隆A
-	exist, err := l.svcCtx.RedisBloom.MightContain(in.Url)
+	// 先用布隆过滤器检查URL是否存在
+	// 如果存在，则直接从MySQL中读取短链
+	// 如果不存在，则生成新的短链ID，保存到MySQL和Redis中，并加入布隆过滤器
+	exist, _ := l.svcCtx.RedisBloom.MightContain(in.Url)
+
 	if exist {
 		shortcode, err := l.ReadFormMysql(in.Url)
 		if err == nil && shortcode != nil {
@@ -87,14 +90,14 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 		return &shortUrl.GenerateShortUrlResponse{
 			Code:      errmsg.ERROR_FAILED_TO_SAVE_TO_MYSQL,
 			Shortcode: "",
-		}, errors.New("Fail to save to mysql")
+		}, errors.New("fail to save to mysql")
 	}
 
 	if err := l.svcCtx.Redis.Rdb.Set(l.svcCtx.Redis.Ctx, shortCode, in.Url, expireDuration).Err(); err != nil {
 		return &shortUrl.GenerateShortUrlResponse{
 			Code:      errmsg.ERROR_FAILED_SAVE_TO_REDIS,
 			Shortcode: "",
-		}, errors.New("Fail to save to redis")
+		}, errors.New("fail to save to redis")
 	}
 
 	// 新增后再加入布隆过滤器
