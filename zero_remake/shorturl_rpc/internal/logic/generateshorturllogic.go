@@ -40,19 +40,10 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 			Shortcode: "",
 		}, errors.New("url is null")
 	}
-	// todo redis的布隆过滤器模块
-	// exist, err := l.svcCtx.RedisBloom.MightContain(in.Url)
-	// if exist {
-	// 	shortcode, err := l.ReadFormMysql(in.Url)
-	// 	if err == nil && shortcode != nil {
-	// 		return &shortUrl.GenerateShortUrlResponse{
-	// 			Code:      errmsg.SUCCESS,
-	// 			Shortcode: shortcode.Shorturl,
-	// 		}, nil
-	// 	}
-	// }
 
-	if repository.Bloom.MightContain(in.Url) {
+	// 先用布隆A
+	exist, err := l.svcCtx.RedisBloom.MightContain(in.Url)
+	if exist {
 		shortcode, err := l.ReadFormMysql(in.Url)
 		if err == nil && shortcode != nil {
 			return &shortUrl.GenerateShortUrlResponse{
@@ -106,7 +97,8 @@ func (l *GenerateShortUrlLogic) GenerateShortUrl(in *shortUrl.GenerateShortUrlRe
 		}, errors.New("Fail to save to redis")
 	}
 
-	repository.Bloom.Add(in.Url)
+	// 新增后再加入布隆过滤器
+	_ = l.svcCtx.RedisBloom.Add(in.Url)
 
 	return &shortUrl.GenerateShortUrlResponse{
 		Code:      errmsg.SUCCESS,

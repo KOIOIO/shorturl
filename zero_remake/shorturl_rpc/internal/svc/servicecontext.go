@@ -1,11 +1,12 @@
 package svc
 
 import (
+	"fmt"
+
 	"example.com/shorturl/short-url/zero_remake/common/init_gorm"
 	"example.com/shorturl/short-url/zero_remake/common/init_redis"
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/config"
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/logic/repository"
-	"fmt"
 	"gorm.io/gorm"
 )
 

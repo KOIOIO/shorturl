@@ -1,9 +1,10 @@
 package main
 
 import (
-	"example.com/shorturl/short-url/zero_remake/middleware"
 	"flag"
 	"fmt"
+
+	"example.com/shorturl/short-url/zero_remake/middleware"
 
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/config"
 	"example.com/shorturl/short-url/zero_remake/shorturl_rpc/internal/server"
